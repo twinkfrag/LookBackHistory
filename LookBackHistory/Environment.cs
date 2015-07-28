@@ -28,7 +28,7 @@ namespace LookBackHistory
 			{
 				return firefoxProfileDir.GetDirectories().Single().GetFiles(GlobalFirefoxHistoryFileName).Single().FullName;
 			}
-			catch (Exception exc) if (exc is DirectoryNotFoundException ||
+			catch (Exception exc) when (exc is DirectoryNotFoundException ||
 					exc is NullReferenceException ||
 					exc is InvalidOperationException)
 			{
