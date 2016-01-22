@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LookBackHistory.App">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MainWindow" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LookBackHistory.Environment" Collapsed="true">
+    <Position X="12.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAQgAAAIIAAAAAQAAAAAAAEAgAAAA=</HashCode>
+      <FileName>Environment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Utils" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAEAAAACAEAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Models.HistoryChr">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAQAQAAAAAAIEAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Models\HistoryChr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Models.HistoryMoz">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACCAAAAAAAAAAQAIAAAAAAAAIAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\HistoryMoz.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Models.HistoryObject">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAgEAAAAAQAAAAAAAAAAAACAACAAAAAAA=</HashCode>
+      <FileName>Models\HistoryObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Models.RowChrome.urls" Collapsed="true">
+    <Position X="14" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAABAAAAAAAAAAAIACABAAQAAEAAAgA=</HashCode>
+      <FileName>Models\RowChrome\urls.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Models.RowChrome.visits">
+    <Position X="14" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAggAAAAAAAAAABIAAAAQAAAAAAAAgA=</HashCode>
+      <FileName>Models\RowChrome\visits.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Models.RowMozilla.moz_historyvisits" Collapsed="true">
+    <Position X="10.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAIAAAAAAAEAAAAAAQBAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\RowMozilla\moz_historyvisits.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Models.RowMozilla.moz_place" Collapsed="true">
+    <Position X="10.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\RowMozilla\moz_place.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Properties.Resources" Collapsed="true">
+    <Position X="12.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Properties.Settings" Collapsed="true">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.ViewModels.HistoryLoader">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>ViewModels\HistoryLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookBackHistory.Views.MainTabItem" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAAEAAIAAiIAAAEAEQAgkAAAAAAAAAQACAIACAg=</HashCode>
+      <FileName>Views\MainTabItem.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LookBackHistory.Views.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LookBackHistory.Views.SearchTabItem" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAIAABAQgAAAAIEAAEAAAAggAAAAAAAAAAAQAACAIA=</HashCode>
+      <FileName>Views\SearchTabItem.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>
