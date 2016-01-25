@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-
+using System.Windows;
 using Livet;
 using Livet.Commands;
 using Livet.Messaging;
@@ -61,6 +61,109 @@ namespace LookBackHistory.ViewModels
 
 		public void Initialize()
 		{
+#if DEBUG
+			TitleSearchText = "C86";
+			UrlSearchText = "pixiv";
+#endif
 		}
+
+
+		#region TitleSearchText変更通知プロパティ
+		private string _TitleSearchText;
+
+		public string TitleSearchText
+		{
+			get
+			{ return _TitleSearchText; }
+			set
+			{
+				if (_TitleSearchText == value)
+					return;
+				_TitleSearchText = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region UrlSearchText変更通知プロパティ
+		private string _UrlSearchText;
+
+		public string UrlSearchText
+		{
+			get
+			{ return _UrlSearchText; }
+			set
+			{
+				if (_UrlSearchText == value)
+					return;
+				_UrlSearchText = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+
+		#region BeginDate変更通知プロパティ
+		private DateTime _BeginDate;
+
+		public DateTime BeginDate
+		{
+			get
+			{ return _BeginDate; }
+			set
+			{
+				if (_BeginDate == value)
+					return;
+				_BeginDate = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+
+		#region EndDate変更通知プロパティ
+		private DateTime _EndDate;
+
+		public DateTime EndDate
+		{
+			get
+			{ return _EndDate; }
+			set
+			{
+				if (_EndDate == value)
+					return;
+				_EndDate = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+
+		#region IsSearchAble, IsDataLoaded, IsDataLoadable 変更通知プロパティ
+		private bool _IsDataLoadable = true;
+		/// <summary>
+		/// IsDataLoaded と同値
+		/// </summary>
+		public bool IsSearchable => !_IsDataLoadable;
+
+		/// <summary>
+		/// IsDataLoaded の反転
+		/// </summary>
+		public bool IsDataLoadable => _IsDataLoadable;
+
+		public bool IsDataLoaded
+		{
+			set
+			{
+				if (_IsDataLoadable == value)
+				{
+					_IsDataLoadable = !value;
+					// ReSharper disable ExplicitCallerInfoArgument
+					RaisePropertyChanged(nameof(IsDataLoadable));
+					RaisePropertyChanged(nameof(IsSearchable));
+					// ReSharper restore ExplicitCallerInfoArgument
+				}
+			}
+		}
+		#endregion
 	}
 }

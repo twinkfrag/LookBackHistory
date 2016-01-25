@@ -26,11 +26,11 @@ namespace LookBackHistory.Views
 			historyLoader = new HistoryLoader();
 			mainTabItem.LoadFirefox += (s, e) =>
 			{
-				mainTabItem.IsDataLoaded = historyLoader.LoadFirefox();
+				((MainTabItemViewModel)mainTabItem.DataContext).IsDataLoaded = historyLoader.LoadFirefox();
 			};
 			mainTabItem.LoadChrome += (s, e) =>
 			{
-				mainTabItem.IsDataLoaded = historyLoader.LoadChrome();
+				((MainTabItemViewModel)mainTabItem.DataContext).IsDataLoaded = historyLoader.LoadChrome();
 			};
 
 			mainTabItem.SearchEvent += MainTabItem_SearchEvent;
@@ -38,17 +38,18 @@ namespace LookBackHistory.Views
 
 		private void MainTabItem_SearchEvent(object sender, EventArgs e)
 		{
+			var context = (MainTabItemViewModel)mainTabItem.DataContext;
 			var newtab = new TabItem()
 			{
 				Header =
-					!string.IsNullOrEmpty(mainTabItem.TitleSearchText) ? mainTabItem.TitleSearchText :
-					!string.IsNullOrEmpty(mainTabItem.UrlSearchText) ? mainTabItem.UrlSearchText : "Search",
+					!string.IsNullOrEmpty(context.TitleSearchText) ? context.TitleSearchText :
+					!string.IsNullOrEmpty(context.UrlSearchText) ? context.UrlSearchText : "Search",
 				Content = new SearchTabItem()
 				{
-					TitleSearchString = mainTabItem.TitleSearchText,
-					UrlSearchString = mainTabItem.UrlSearchText,
-					BeginDate = mainTabItem.BeginDate,
-					EndDate = mainTabItem.EndDate,
+					TitleSearchString = context.TitleSearchText,
+					UrlSearchString = context.UrlSearchText,
+					BeginDate = context.BeginDate,
+					EndDate = context.EndDate,
 				},
 			};
 			tab.Items.Add(newtab);
