@@ -10,6 +10,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024">
+	<Window.DataContext>
+		<vm:MainWindowViewModel />
+	</Window.DataContext>
 
 	<i:Interaction.Triggers>
 

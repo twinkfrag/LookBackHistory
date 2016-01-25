@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using LookBackHistory.ControlsDispatcher;
 using LookBackHistory.ViewModels;
 
 namespace LookBackHistory.Views
@@ -39,9 +40,9 @@ namespace LookBackHistory.Views
 		{
 			var newtab = new TabItem()
 			{
-				Header = 
-					!string.IsNullOrEmpty(mainTabItem.TitleSearchText) ? mainTabItem.TitleSearchText : 
-					!string.IsNullOrEmpty(mainTabItem.UrlSearchText) ? mainTabItem.UrlSearchText :  "Search",
+				Header =
+					!string.IsNullOrEmpty(mainTabItem.TitleSearchText) ? mainTabItem.TitleSearchText :
+					!string.IsNullOrEmpty(mainTabItem.UrlSearchText) ? mainTabItem.UrlSearchText : "Search",
 				Content = new SearchTabItem()
 				{
 					TitleSearchString = mainTabItem.TitleSearchText,

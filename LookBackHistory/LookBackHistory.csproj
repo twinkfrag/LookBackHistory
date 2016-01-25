@@ -135,6 +135,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ControlsDispatcher\HistoryLoader.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="Models\HistoryChr.cs" />
     <Compile Include="Models\HistoryMoz.cs" />
@@ -142,9 +143,10 @@
     <Compile Include="Models\RowMozilla\moz_historyvisits.cs" />
     <Compile Include="Models\RowChrome\urls.cs" />
     <Compile Include="Models\RowChrome\visits.cs" />
-    <Compile Include="ViewModels\HistoryLoader.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\MainTabItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\SearchTabItemViewModel.cs" />
     <Compile Include="Views\MainTabItem.xaml.cs">
       <DependentUpon>MainTabItem.xaml</DependentUpon>
     </Compile>
