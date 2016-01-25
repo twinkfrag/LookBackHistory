@@ -153,6 +153,10 @@
     <Compile Include="Views\SearchTabItem.xaml.cs">
       <DependentUpon>SearchTabItem.xaml</DependentUpon>
     </Compile>
+    <Page Include="SampleData\SearchTabItemSampleData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

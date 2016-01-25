@@ -39,17 +39,18 @@ namespace LookBackHistory.Views
 		private void MainTabItem_SearchEvent(object sender, EventArgs e)
 		{
 			var context = (MainTabItemViewModel)mainTabItem.DataContext;
-			var newtab = new TabItem()
+			var newtab = new TabItem
 			{
 				Header =
 					!string.IsNullOrEmpty(context.TitleSearchText) ? context.TitleSearchText :
 					!string.IsNullOrEmpty(context.UrlSearchText) ? context.UrlSearchText : "Search",
-				Content = new SearchTabItem()
+				Content = new SearchTabItem
 				{
-					TitleSearchString = context.TitleSearchText,
-					UrlSearchString = context.UrlSearchText,
-					BeginDate = context.BeginDate,
-					EndDate = context.EndDate,
+					DataContext = new SearchTabItemViewModel(
+						title: context.TitleSearchText,
+						url: context.UrlSearchText,
+						begin: context.BeginDate,
+						end: context.EndDate)
 				},
 			};
 			tab.Items.Add(newtab);

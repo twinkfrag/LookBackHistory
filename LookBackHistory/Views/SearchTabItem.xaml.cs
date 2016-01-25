@@ -13,99 +13,12 @@ namespace LookBackHistory.Views
 	/// <summary>
 	/// SearchTabItem.xaml の相互作用ロジック
 	/// </summary>
-	public partial class SearchTabItem : UserControl, INotifyPropertyChanged
+	public partial class SearchTabItem : UserControl
 	{
 		public SearchTabItem()
 		{
 			InitializeComponent();
-			this.DataContext = this;
-
-			PropertyChanged += (s, e) =>
-			{
-				if (e.PropertyName != nameof(Histories))
-				{
-					Histories = MainWindow.historyLoader.Histories.Where(x =>
-						(x.Title?.Contains(TitleSearchString ?? string.Empty) ?? false) &&
-						(x.LastAccess > BeginDate) &&
-						(x.LastAccess < EndDate) &&
-						(x.Url?.Contains(UrlSearchString ?? string.Empty) ?? false)
-						);
-				}
-			};
 		}
-
-		#region Histories変更通知プロパティ
-		private IEnumerable<HistoryObject> _histories = new List<HistoryObject>();
-		public IEnumerable<HistoryObject> Histories
-		{
-			get { return this._histories; }
-			set
-			{
-				_histories = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Histories)));
-			}
-		}
-		#endregion
-
-		#region TitleSearchString 変更通知プロパティ
-		private string _titleSearchString;
-		public string TitleSearchString
-		{
-			get { return this._titleSearchString; }
-			set
-			{
-				if (_titleSearchString != value)
-				{
-					_titleSearchString = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TitleSearchString)));
-				}
-			}
-		}
-		#endregion
-
-		#region UrlSearchString 変更通知プロパティ
-		private string _urlSearchString;
-		public string UrlSearchString
-		{
-			get { return this._urlSearchString; }
-			set
-			{
-				if (_urlSearchString != value)
-				{
-					_urlSearchString = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UrlSearchString)));
-				}
-			}
-		}
-		#endregion
-
-		#region BeginDate 変更通知プロパティ
-		private DateTime _beginDate;
-		public DateTime BeginDate
-		{
-			get { return this._beginDate; }
-			set
-			{
-				_beginDate = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BeginDate)));
-			}
-		}
-		#endregion
-
-		#region EndDate 変更通知プロパティ
-		private DateTime _endDate;
-		public DateTime EndDate
-		{
-			get { return this._endDate; }
-			set
-			{
-				_endDate = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(EndDate)));
-			}
-		}
-		#endregion
-
-		public event PropertyChangedEventHandler PropertyChanged;
 
 		private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
 		{
