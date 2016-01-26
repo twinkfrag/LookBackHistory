@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ using Livet.Messaging.Windows;
 using System.Reactive;
 using System.Windows.Controls;
 using LookBackHistory.Models;
+using Reactive.Bindings.Extensions;
 
 namespace LookBackHistory.ViewModels
 {
@@ -63,13 +65,42 @@ namespace LookBackHistory.ViewModels
 
 		public void Initialize()
 		{
+			TabItems.CollectionChangedAsObservable()
+			        .Subscribe(e => SelectedTabItem = e.NewItems.OfType<ITabItem>().FirstOrDefault() ?? TabItems[0])
+			        .AddTo(this.CompositeDisposable);
 		}
 
-		public MainWindowViewModel()
+		#region Singleton
+		private static MainWindowViewModel instance;
+
+		public static MainWindowViewModel Instance => instance ?? (instance = new MainWindowViewModel());
+
+		private MainWindowViewModel()
 		{
-			TabItems = new List<TabItemViewModelBase> { new MainTabItemViewModel() };
+			TabItems = new ObservableCollection<ITabItem> { new MainTabItemViewModel() };
 		}
+		#endregion
 
-		public IList<TabItemViewModelBase> TabItems { get; }
+
+		public ObservableCollection<ITabItem> TabItems { get; }
+
+
+		#region SelectedTabItem 変更通知プロパティ
+		private ITabItem _SelectedTabItem;
+
+		public ITabItem SelectedTabItem
+		{
+			get
+			{ return _SelectedTabItem; }
+			set
+			{
+				if (_SelectedTabItem == value)
+					return;
+				_SelectedTabItem = value;
+				RaisePropertyChanged();
+			}
+		}
+		#endregion
+
 	}
 }

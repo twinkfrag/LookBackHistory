@@ -1,0 +1,11 @@
+﻿<vm:MainTabItemViewModel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:vm="clr-namespace:LookBackHistory.ViewModels"
+					
+					TitleSearchText="foo"
+					UrlSearchText="bar"
+					BeginDate="2010/10/10"
+					EndDate="2020/12/20"
+					IsDataLoaded="False"
+					>
+</vm:MainTabItemViewModel>

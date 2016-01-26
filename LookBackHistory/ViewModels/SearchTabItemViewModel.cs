@@ -18,56 +18,16 @@ using LookBackHistory.Views;
 
 namespace LookBackHistory.ViewModels
 {
-	public class SearchTabItemViewModel : TabItemViewModelBase
+	public class SearchTabItemViewModel : ViewModel, ITabItem
 	{
-		/* コマンド、プロパティの定義にはそれぞれ 
-         * 
-         *  lvcom   : ViewModelCommand
-         *  lvcomn  : ViewModelCommand(CanExecute無)
-         *  llcom   : ListenerCommand(パラメータ有のコマンド)
-         *  llcomn  : ListenerCommand(パラメータ有のコマンド・CanExecute無)
-         *  lprop   : 変更通知プロパティ(.NET4.5ではlpropn)
-         *  
-         * を使用してください。
-         * 
-         * Modelが十分にリッチであるならコマンドにこだわる必要はありません。
-         * View側のコードビハインドを使用しないMVVMパターンの実装を行う場合でも、ViewModelにメソッドを定義し、
-         * LivetCallMethodActionなどから直接メソッドを呼び出してください。
-         * 
-         * ViewModelのコマンドを呼び出せるLivetのすべてのビヘイビア・トリガー・アクションは
-         * 同様に直接ViewModelのメソッドを呼び出し可能です。
-         */
-
-		/* ViewModelからViewを操作したい場合は、View側のコードビハインド無で処理を行いたい場合は
-         * Messengerプロパティからメッセージ(各種InteractionMessage)を発信する事を検討してください。
-         */
-
-		/* Modelからの変更通知などの各種イベントを受け取る場合は、PropertyChangedEventListenerや
-         * CollectionChangedEventListenerを使うと便利です。各種ListenerはViewModelに定義されている
-         * CompositeDisposableプロパティ(LivetCompositeDisposable型)に格納しておく事でイベント解放を容易に行えます。
-         * 
-         * ReactiveExtensionsなどを併用する場合は、ReactiveExtensionsのCompositeDisposableを
-         * ViewModelのCompositeDisposableプロパティに格納しておくのを推奨します。
-         * 
-         * LivetのWindowテンプレートではViewのウィンドウが閉じる際にDataContextDisposeActionが動作するようになっており、
-         * ViewModelのDisposeが呼ばれCompositeDisposableプロパティに格納されたすべてのIDisposable型のインスタンスが解放されます。
-         * 
-         * ViewModelを使いまわしたい時などは、ViewからDataContextDisposeActionを取り除くか、発動のタイミングをずらす事で対応可能です。
-         */
-
-		/* UIDispatcherを操作する場合は、DispatcherHelperのメソッドを操作してください。
-         * UIDispatcher自体はApp.xaml.csでインスタンスを確保してあります。
-         * 
-         * LivetのViewModelではプロパティ変更通知(RaisePropertyChanged)やDispatcherCollectionを使ったコレクション変更通知は
-         * 自動的にUIDispatcher上での通知に変換されます。変更通知に際してUIDispatcherを操作する必要はありません。
-         */
-
-
-		public SearchTabItemViewModel() { }
-
-		public SearchTabItemViewModel(string title = null, string url = null, DateTime begin = default(DateTime), DateTime end = default(DateTime))
+		public SearchTabItemViewModel()
 		{
-			Histories = HistoryLoader.Instance.History.Where(x =>
+			HeaderTitle = "Search";
+		}
+
+		public SearchTabItemViewModel(string title, string url, DateTime begin, DateTime end)
+		{
+			History = HistoryLoader.Instance.History.Where(x =>
 				(x.Title?.Contains(title ?? string.Empty) ?? false) &&
 					(x.LastAccess > begin) &&
 					(x.LastAccess < end) &&
@@ -79,20 +39,20 @@ namespace LookBackHistory.ViewModels
 						  !string.IsNullOrEmpty(url) ? url : "Search";
 		}
 
-		public override string HeaderTitle { get; }
+		public string HeaderTitle { get; }
 
-		#region Histories変更通知プロパティ
-		private HistoryEntryViewModel[] _Histories;
+		#region History 変更通知プロパティ
+		private HistoryEntryViewModel[] _History;
 
-		public HistoryEntryViewModel[] Histories
+		public HistoryEntryViewModel[] History
 		{
 			get
-			{ return _Histories; }
+			{ return _History; }
 			set
 			{
-				if (_Histories == value)
+				if (_History == value)
 					return;
-				_Histories = value;
+				_History = value;
 				RaisePropertyChanged();
 			}
 		}
