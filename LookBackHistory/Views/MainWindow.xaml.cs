@@ -23,40 +23,37 @@ namespace LookBackHistory.Views
 		{
 			InitializeComponent();
 
-			historyLoader = new HistoryLoader();
-			mainTabItem.LoadFirefox += (s, e) =>
-			{
-				((MainTabItemViewModel)mainTabItem.DataContext).IsDataLoaded = historyLoader.LoadFirefox();
-			};
-			mainTabItem.LoadChrome += (s, e) =>
-			{
-				((MainTabItemViewModel)mainTabItem.DataContext).IsDataLoaded = historyLoader.LoadChrome();
-			};
+			//mainTabItem.LoadFirefox += (s, e) =>
+			//{
+			//	((MainTabItemViewModel)mainTabItem.DataContext).IsDataLoaded = historyLoader.LoadFirefox();
+			//};
+			//mainTabItem.LoadChrome += (s, e) =>
+			//{
+			//	((MainTabItemViewModel)mainTabItem.DataContext).IsDataLoaded = historyLoader.LoadChrome();
+			//};
 
-			mainTabItem.SearchEvent += MainTabItem_SearchEvent;
+			//mainTabItem.SearchEvent += MainTabItem_SearchEvent;
 		}
 
 		private void MainTabItem_SearchEvent(object sender, EventArgs e)
 		{
-			var context = (MainTabItemViewModel)mainTabItem.DataContext;
-			var newtab = new TabItem
-			{
-				Header =
-					!string.IsNullOrEmpty(context.TitleSearchText) ? context.TitleSearchText :
-					!string.IsNullOrEmpty(context.UrlSearchText) ? context.UrlSearchText : "Search",
-				Content = new SearchTabItem
-				{
-					DataContext = new SearchTabItemViewModel(
-						title: context.TitleSearchText,
-						url: context.UrlSearchText,
-						begin: context.BeginDate,
-						end: context.EndDate)
-				},
-			};
-			tab.Items.Add(newtab);
-			tab.SelectedItem = newtab;
+			//var context = (MainTabItemViewModel)mainTabItem.DataContext;
+			//var newtab = new TabItem
+			//{
+			//	Header =
+			//		!string.IsNullOrEmpty(context.TitleSearchText) ? context.TitleSearchText :
+			//		!string.IsNullOrEmpty(context.UrlSearchText) ? context.UrlSearchText : "Search",
+			//	Content = new SearchTabItem
+			//	{
+			//		DataContext = new SearchTabItemViewModel(
+			//			title: context.TitleSearchText,
+			//			url: context.UrlSearchText,
+			//			begin: context.BeginDate,
+			//			end: context.EndDate)
+			//	},
+			//};
+			//tab.Items.Add(newtab);
+			//tab.SelectedItem = newtab;
 		}
-
-		public static HistoryLoader historyLoader;
 	}
 }

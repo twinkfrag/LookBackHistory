@@ -12,13 +12,13 @@ using Livet.Messaging;
 using Livet.Messaging.IO;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
-
+using LookBackHistory.ControlsDispatcher;
 using LookBackHistory.Models;
 using LookBackHistory.Views;
 
 namespace LookBackHistory.ViewModels
 {
-	public class SearchTabItemViewModel : ViewModel
+	public class SearchTabItemViewModel : TabItemViewModelBase
 	{
 		/* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -67,17 +67,19 @@ namespace LookBackHistory.ViewModels
 
 		public SearchTabItemViewModel(string title = null, string url = null, DateTime begin = default(DateTime), DateTime end = default(DateTime))
 		{
-			Histories = MainWindow.historyLoader.Histories.Where(x =>
+			Histories = HistoryLoader.Instance.History.Where(x =>
 				(x.Title?.Contains(title ?? string.Empty) ?? false) &&
 					(x.LastAccess > begin) &&
 					(x.LastAccess < end) &&
 					(x.Url?.Contains(url ?? string.Empty) ?? false))
 				.Select(x => new HistoryEntryViewModel(x))
 				.ToArray();
+
+			HeaderTitle = !string.IsNullOrEmpty(title) ? title :
+						  !string.IsNullOrEmpty(url) ? url : "Search";
 		}
 
-		public void Initialize() { }
-
+		public override string HeaderTitle { get; }
 
 		#region Histories変更通知プロパティ
 		private HistoryEntryViewModel[] _Histories;

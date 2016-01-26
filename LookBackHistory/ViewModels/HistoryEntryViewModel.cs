@@ -2,17 +2,17 @@
 using System.Diagnostics;
 using Livet;
 
-using LookBackHistory.Models;
+using LookBackHistory.Models.HistoryEntries;
 
 namespace LookBackHistory.ViewModels
 {
 	public class HistoryEntryViewModel : ViewModel
 	{
-		private HistoryObject entry;
+		private HistoryEntryBase entry;
 
 		public HistoryEntryViewModel() { }
 
-		public HistoryEntryViewModel(HistoryObject entry)
+		public HistoryEntryViewModel(HistoryEntryBase entry)
 		{
 			this.entry = entry;
 

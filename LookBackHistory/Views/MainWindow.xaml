@@ -34,11 +34,23 @@
 
 	</i:Interaction.Triggers>
 
-	<Grid>
-		<TabControl Name="tab">
-			<TabItem Header="Main">
-				<v:MainTabItem x:Name="mainTabItem" Margin="10" />
-			</TabItem>
+	<StackPanel>
+		<TabControl Name="tab" ItemsSource="{Binding Path=TabItems}">
+			<TabControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding HeaderTitle}" />
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+			<TabControl.ContentTemplate>
+				<DataTemplate>
+					<ContentControl Content="{Binding}" Margin="10" />
+				</DataTemplate>
+			</TabControl.ContentTemplate>
+			<TabControl.Resources>
+				<DataTemplate DataType="{x:Type vm:MainTabItemViewModel}">
+					<v:MainTabItem />
+				</DataTemplate>
+			</TabControl.Resources>
 		</TabControl>
-	</Grid>
+	</StackPanel>
 </Window>

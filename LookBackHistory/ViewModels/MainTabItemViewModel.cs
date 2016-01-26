@@ -15,7 +15,7 @@ using LookBackHistory.Models;
 
 namespace LookBackHistory.ViewModels
 {
-	public class MainTabItemViewModel : ViewModel
+	public class MainTabItemViewModel : TabItemViewModelBase
 	{
 		/* コマンド、プロパティの定義にはそれぞれ 
          * 
@@ -67,6 +67,8 @@ namespace LookBackHistory.ViewModels
 #endif
 		}
 
+		public override string HeaderTitle => "Main";
+
 
 		#region TitleSearchText変更通知プロパティ
 		private string _TitleSearchText;
@@ -102,7 +104,6 @@ namespace LookBackHistory.ViewModels
 		}
 		#endregion
 
-
 		#region BeginDate変更通知プロパティ
 		private DateTime _BeginDate = Utils.OneMonthAgo;
 
@@ -119,7 +120,6 @@ namespace LookBackHistory.ViewModels
 			}
 		}
 		#endregion
-
 
 		#region EndDate変更通知プロパティ
 		private DateTime _EndDate = DateTime.Today;
@@ -165,5 +165,33 @@ namespace LookBackHistory.ViewModels
 			}
 		}
 		#endregion
+
+
+		#region LoadFirefoxCommand
+		private ViewModelCommand _LoadFirefoxCommand;
+
+		public ViewModelCommand LoadFirefoxCommand
+		{
+			get
+			{
+				if (_LoadFirefoxCommand == null)
+				{
+					_LoadFirefoxCommand = new ViewModelCommand(LoadFirefox, CanLoadFirefox);
+				}
+				return _LoadFirefoxCommand;
+			}
+		}
+
+		public bool CanLoadFirefox()
+		{
+			return IsDataLoadable;
+		}
+
+		public void LoadFirefox()
+		{
+
+		}
+		#endregion
+
 	}
 }

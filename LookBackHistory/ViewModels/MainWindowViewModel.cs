@@ -11,6 +11,8 @@ using Livet.Messaging.IO;
 using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
+using System.Reactive;
+using System.Windows.Controls;
 using LookBackHistory.Models;
 
 namespace LookBackHistory.ViewModels
@@ -62,5 +64,12 @@ namespace LookBackHistory.ViewModels
 		public void Initialize()
 		{
 		}
+
+		public MainWindowViewModel()
+		{
+			TabItems = new List<TabItemViewModelBase> { new MainTabItemViewModel() };
+		}
+
+		public IList<TabItemViewModelBase> TabItems { get; }
 	}
 }
