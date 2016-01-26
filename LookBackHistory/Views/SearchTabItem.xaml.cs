@@ -18,10 +18,7 @@ namespace LookBackHistory.Views
 
 		private void Item_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			var item = (this.DataContext as SearchTabItemViewModel)?.SelectedItem;
-			if (item == null) return;
-
-			Process.Start(item.Url);
+			(this.DataContext as SearchTabItemViewModel)?.SelectedItem?.Open();
 		}
 	}
 }
