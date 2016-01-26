@@ -9,10 +9,8 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d"
+			 d:DataContext="{d:DesignData /SampleData/MainTabSampleData.xaml}"
              d:DesignHeight="300" d:DesignWidth="300">
-	<UserControl.DataContext>
-		<vm:MainTabItemViewModel />
-	</UserControl.DataContext>
 
 	<i:Interaction.Triggers>
 
@@ -37,15 +35,13 @@
 	<Grid>
 		<StackPanel>
 			<StackPanel Orientation="Horizontal">
-				<Button x:Name="LoadFF" Content="Load Firefox" 
+				<Button Command="{Binding LoadFirefoxCommand, Mode=OneWay}" Content="Load Firefox" 
 					HorizontalAlignment="Left" VerticalAlignment="Top" 
-					Width="Auto" Click="LoadFF_Click"
-					IsEnabled="{Binding Path=IsDataLoadable, Mode=OneWay}"/>
+					Width="Auto" />
 				<Border Margin="5" Height="5" />
-				<Button x:Name="LoadCh" Content="Load Chrome"
+				<Button Command="{Binding LoadChromeCommand, Mode=OneWay}" Content="Load Chrome"
 					HorizontalAlignment="Left" VerticalAlignment="Top" 
-					Width="Auto" Click="LoadCh_Click"
-					IsEnabled="{Binding Path=IsDataLoadable, Mode=OneWay}"/>
+					Width="Auto" />
 			</StackPanel>
 			<Border Height="1" Margin="0, 5" />
 			<DockPanel>
@@ -73,7 +69,7 @@
 							SelectedDate="{Binding Path=EndDate, Mode=TwoWay}" />
 					</Grid>
 				</StackPanel>
-				<Button x:Name="Search" Content="Search" IsEnabled="{Binding Path=IsSearchable, Mode=OneWay}" Click="Search_Click" DockPanel.Dock="Right" />
+				<Button Command="{Binding SearchCommand, Mode=OneWay}" Content="Search" DockPanel.Dock="Right" />
 			</DockPanel>
 		</StackPanel>
 	</Grid>

@@ -14,26 +14,5 @@ namespace LookBackHistory.Views
 		{
 			InitializeComponent();
 		}
-
-		public event EventHandler SearchEvent = (s, e) => { Console.WriteLine("search"); };
-
-		public event EventHandler LoadFirefox = (s, e) => { Console.WriteLine("load firefox event"); };
-
-		public event EventHandler LoadChrome = (s, e) => { Console.WriteLine("load chrome event"); };
-
-		private void LoadFF_Click(object sender, RoutedEventArgs e)
-		{
-			LoadFirefox?.Invoke(this, null);
-		}
-
-		private void LoadCh_Click(object sender, RoutedEventArgs e)
-		{
-			LoadChrome?.Invoke(this, null);
-		}
-
-		private void Search_Click(object sender, RoutedEventArgs e)
-		{
-			SearchEvent?.Invoke(this, null);
-		}
 	}
 }

@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024">
 	<Window.DataContext>
-		<vm:MainWindowViewModel />
+		<x:Static Member="vm:MainWindowViewModel.Instance" />
 	</Window.DataContext>
 
 	<i:Interaction.Triggers>
@@ -35,7 +35,7 @@
 	</i:Interaction.Triggers>
 
 	<StackPanel>
-		<TabControl Name="tab" ItemsSource="{Binding Path=TabItems}">
+		<TabControl ItemsSource="{Binding Path=TabItems}" SelectedItem="{Binding Path=SelectedTabItem}" >
 			<TabControl.ItemTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding HeaderTitle}" />
@@ -49,6 +49,9 @@
 			<TabControl.Resources>
 				<DataTemplate DataType="{x:Type vm:MainTabItemViewModel}">
 					<v:MainTabItem />
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type vm:SearchTabItemViewModel}">
+					<v:SearchTabItem />
 				</DataTemplate>
 			</TabControl.Resources>
 		</TabControl>
