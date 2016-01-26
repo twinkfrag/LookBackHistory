@@ -144,6 +144,7 @@
     <Compile Include="Models\RowChrome\urls.cs" />
     <Compile Include="Models\RowChrome\visits.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\HistoryEntryViewModel.cs" />
     <Compile Include="ViewModels\MainTabItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SearchTabItemViewModel.cs" />

@@ -1,7 +1,12 @@
 ﻿<vm:SearchTabItemViewModel 
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:m="clr-namespace:LookBackHistory.Models"
 	xmlns:vm="clr-namespace:LookBackHistory.ViewModels"
+	>
+	<vm:SearchTabItemViewModel.Histories>
+		<vm:HistoryEntryViewModel Title="A" Url="http://hogehoge/" LastAccess="2015/12/25 15:52:31"/>
+		<vm:HistoryEntryViewModel Title="B" Url="http://fugafuga/" LastAccess="2016/01/02 12:38:26"/>
+	</vm:SearchTabItemViewModel.Histories>
 	
-	
-	/>
+	</vm:SearchTabItemViewModel>

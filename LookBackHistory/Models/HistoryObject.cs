@@ -15,5 +15,10 @@ namespace LookBackHistory.Models
 		public virtual string DataText { get; set; }
 
 		public virtual dynamic DataDynamic { get; set; }
+
+		public override string ToString()
+		{
+			return $"{Title} : {Url} : {LastAccess:yyyymmdd}";
+		}
 	}
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
-
+using System.Diagnostics;
+using System.Windows;
 using Livet;
 using Livet.Commands;
 using Livet.Messaging;
@@ -69,16 +71,18 @@ namespace LookBackHistory.ViewModels
 				(x.Title?.Contains(title ?? string.Empty) ?? false) &&
 					(x.LastAccess > begin) &&
 					(x.LastAccess < end) &&
-					(x.Url?.Contains(url ?? string.Empty) ?? false));
+					(x.Url?.Contains(url ?? string.Empty) ?? false))
+				.Select(x => new HistoryEntryViewModel(x))
+				.ToArray();
 		}
 
 		public void Initialize() { }
 
 
 		#region Histories変更通知プロパティ
-		private IEnumerable<HistoryObject> _Histories;
+		private HistoryEntryViewModel[] _Histories;
 
-		public IEnumerable<HistoryObject> Histories
+		public HistoryEntryViewModel[] Histories
 		{
 			get
 			{ return _Histories; }
@@ -92,5 +96,7 @@ namespace LookBackHistory.ViewModels
 		}
 		#endregion
 
+
+		public HistoryEntryViewModel SelectedItem { get; set; }
 	}
 }
