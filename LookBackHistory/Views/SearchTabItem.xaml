@@ -33,7 +33,7 @@
 
 	</i:Interaction.Triggers>
 
-	<ListBox Name="dataList" 
+	<ListBox 
 		ItemsSource="{Binding Path=Histories, Mode=OneWay}" 
 		SelectedItem="{Binding Path=SelectedItem, Mode=OneWayToSource}" 
 		>
