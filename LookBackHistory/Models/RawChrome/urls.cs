@@ -1,10 +1,11 @@
 ﻿using System.Data.Linq.Mapping;
 // ReSharper disable InconsistentNaming
+#pragma warning disable 0649
 
 namespace LookBackHistory.Models.RawChrome
 {
 	[Table(Name = "urls")]
-	class urls
+	internal class urls
 	{
 		[Column(Name = "id", IsPrimaryKey = true, DbType = "INT")]
 		public long id;

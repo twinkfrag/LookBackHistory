@@ -1,5 +1,6 @@
 ﻿using System.Data.Linq.Mapping;
 // ReSharper disable InconsistentNaming
+#pragma warning disable 0649
 
 namespace LookBackHistory.Models.RawMozilla
 {
