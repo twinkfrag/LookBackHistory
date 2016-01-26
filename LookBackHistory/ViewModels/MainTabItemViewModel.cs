@@ -104,7 +104,7 @@ namespace LookBackHistory.ViewModels
 
 
 		#region BeginDate変更通知プロパティ
-		private DateTime _BeginDate;
+		private DateTime _BeginDate = Utils.OneMonthAgo;
 
 		public DateTime BeginDate
 		{
@@ -122,7 +122,7 @@ namespace LookBackHistory.ViewModels
 
 
 		#region EndDate変更通知プロパティ
-		private DateTime _EndDate;
+		private DateTime _EndDate = DateTime.Today;
 
 		public DateTime EndDate
 		{
