@@ -8,11 +8,11 @@ namespace LookBackHistory.ViewModels
 {
 	public class HistoryEntryViewModel : ViewModel
 	{
-		private HistoryEntryBase entry;
+		private Entry entry;
 
 		public HistoryEntryViewModel() { }
 
-		public HistoryEntryViewModel(HistoryEntryBase entry)
+		public HistoryEntryViewModel(Entry entry)
 		{
 			this.entry = entry;
 

@@ -15,7 +15,7 @@ using Reactive.Bindings.Extensions;
 
 namespace LookBackHistory.Models.HistoryCollections
 {
-	public class ChromeDispatcher : HistoryDipatcherBase<ChromeEntry>
+	public class ChromeDispatcher : HistoryDipatcherBase
 	{
 		public override async Task LoadAsync()
 		{
@@ -48,16 +48,15 @@ namespace LookBackHistory.Models.HistoryCollections
 
 					Queryable = from v in context.GetTable<visits>()
 								join u in context.GetTable<urls>() on v.url equals u.id
-								select new ChromeEntry
+								select new Entry
 								{
-									ID = v.id,
-									FaviconId = u.favicon_id,
-									FromVisit = v.from_visit,
+									Id = v.id,
+									FromVisitId = v.from_visit,
 									Title = u.title,
 									Url = u.url,
-									VisitCount = u.visit_count,
-									VisitTime = v.visit_time / 10,
-									VisitDuration = v.visit_duration,
+									Count = u.visit_count,
+									RawTime = v.visit_time / 10,
+									RawTimeMode = Entry.TimeMode.FileTimeCenti,
 								};
 				}
 			}

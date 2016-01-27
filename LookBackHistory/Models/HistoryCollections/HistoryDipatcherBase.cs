@@ -8,15 +8,15 @@ using LookBackHistory.Models.HistoryEntries;
 
 namespace LookBackHistory.Models.HistoryCollections
 {
-	public abstract class HistoryDipatcherBase<T> : IDisposable where T : HistoryEntryBase
+	public abstract class HistoryDipatcherBase : IDisposable
 	{
 		public CompositeDisposable CompositeDisposable { get; } = new CompositeDisposable();
 
-		public IQueryable<T> Queryable { get; protected set; }
+		public IQueryable<Entry> Queryable { get; protected set; }
 
 		public abstract Task LoadAsync();
 
-		public IEnumerable<T> Search(string title, string url, DateTime begin, DateTime end)
+		public IEnumerable<Entry> Search(string title, string url, DateTime begin, DateTime end)
 		{
 			if (Queryable == null) throw new InvalidOperationException("Not Loaded");
 

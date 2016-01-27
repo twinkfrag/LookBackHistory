@@ -40,7 +40,7 @@ namespace LookBackHistory.ViewModels
 						  !string.IsNullOrEmpty(url) ? url : "Search";
 		}
 
-		public SearchTabItemViewModel(IEnumerable<HistoryEntryBase> history, string header = "Search")
+		public SearchTabItemViewModel(IEnumerable<Entry> history, string header = "Search")
 		{
 			History = history.Select(x => new HistoryEntryViewModel(x)).ToArray();
 			HeaderTitle = header;

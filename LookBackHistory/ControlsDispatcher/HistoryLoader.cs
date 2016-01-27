@@ -17,7 +17,7 @@ namespace LookBackHistory.ControlsDispatcher
 		/// <summary>
 		/// 履歴リスト
 		/// </summary>
-		public IEnumerable<HistoryEntryBase> History { get; private set; }
+		public IEnumerable<Entry> History { get; private set; }
 
 		public static HistoryLoader Instance { get; } = new HistoryLoader();
 
@@ -32,8 +32,8 @@ namespace LookBackHistory.ControlsDispatcher
 		{
 			Console.WriteLine("Load Firefox");
 			var h = new FirefoxHistory();
-			h.Load();
-			History = h.History;
+			h.LoadAsync();
+			History = h.Queryable;
 		}
 
 

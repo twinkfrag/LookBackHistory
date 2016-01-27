@@ -140,9 +140,7 @@
     <Compile Include="Models\HistoryCollections\ChromeDispatcher.cs" />
     <Compile Include="Models\HistoryCollections\FirefoxHistory.cs" />
     <Compile Include="Models\HistoryCollections\HistoryDipatcherBase.cs" />
-    <Compile Include="Models\HistoryEntries\ChromeEntry.cs" />
-    <Compile Include="Models\HistoryEntries\FirefoxEntry.cs" />
-    <Compile Include="Models\HistoryEntries\HistoryEntryBase.cs" />
+    <Compile Include="Models\HistoryEntries\Entry.cs" />
     <Compile Include="Models\RawMozilla\moz_historyvisits.cs" />
     <Compile Include="Models\RawChrome\urls.cs" />
     <Compile Include="Models\RawChrome\visits.cs" />
