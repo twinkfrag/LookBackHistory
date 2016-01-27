@@ -18,6 +18,8 @@ namespace LookBackHistory.Models.HistoryCollections
 
 		public IEnumerable<T> Search(string title, string url, DateTime begin, DateTime end)
 		{
+			if (Queryable == null) throw new InvalidOperationException("Not Loaded");
+
 			var e = from h in Queryable
 					where h.LastAccess > begin
 					where h.LastAccess < end
