@@ -5,7 +5,7 @@
 namespace LookBackHistory.Models.RawChrome
 {
 	[Table(Name = "urls")]
-	internal class urls
+	public class urls
 	{
 		[Column(Name = "id", IsPrimaryKey = true, DbType = "INT")]
 		public long id;

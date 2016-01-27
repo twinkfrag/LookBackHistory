@@ -195,6 +195,8 @@ namespace LookBackHistory.ViewModels
 			MainWindowViewModel.Instance.TabItems.Add(new SearchTabItemViewModel(q, header));
 
 			dispatcher.Dispose();
+			dispatcher = null;
+			IsDataLoaded = false;
 		}
 		#endregion
 

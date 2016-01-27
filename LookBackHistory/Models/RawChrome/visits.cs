@@ -5,7 +5,7 @@
 namespace LookBackHistory.Models.RawChrome
 {
 	[Table(Name = "visits")]
-	class visits
+	public class visits
 	{
 		[Column(Name = "id", IsPrimaryKey = true, DbType = "INT")]
 		public long id;

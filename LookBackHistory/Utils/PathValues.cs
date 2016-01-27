@@ -9,13 +9,13 @@ namespace LookBackHistory.Utils
 	/// <summary>
 	/// システム環境
 	/// </summary>
-	public static class Environment
+	public static class PathValues
 	{
 		public static string RoamingApplicationData =>
-			System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+			Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
 		public static string LocalApplicationData =>
-			System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
 		private static string GlobalFirefoxHistoryFileName => "places.sqlite";
 

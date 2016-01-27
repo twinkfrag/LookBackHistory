@@ -71,9 +71,9 @@ namespace LookBackHistory.ViewModels
 		}
 
 		#region Singleton
-		private static MainWindowViewModel instance;
+		private static MainWindowViewModel _instance;
 
-		public static MainWindowViewModel Instance => instance ?? (instance = new MainWindowViewModel());
+		public static MainWindowViewModel Instance => _instance ?? (_instance = new MainWindowViewModel());
 
 		private MainWindowViewModel()
 		{

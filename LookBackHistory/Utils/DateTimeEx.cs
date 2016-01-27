@@ -18,24 +18,10 @@ namespace LookBackHistory.Utils
 			return (dateTime - unixEpoch).Ticks / 10;
 		}
 
-		public static DateTime FromFileTimeSec(long fileTimeSec)
-		{
-			return zero.AddMilliseconds(fileTimeSec * 1000);
-		}
+		public static DateTime OneWeekAgo => DateTime.Today - TimeSpan.FromDays(7);
 
-		public static long FileTimeFromUnixEpoch(long epochMillisecond)
-		{
-			return FromUnixEpoch(epochMillisecond).ToFileTime() / 1000;
-		}
+		public static DateTime Tomorrow => (DateTime.Today + TimeSpan.FromDays(1)).Date;
 
-		private static readonly TimeSpan oneWeek = new TimeSpan(7, 0, 0, 0);
-		
-		private static readonly TimeSpan oneDay = new TimeSpan(1, 0, 0, 0);
-
-		public static DateTime OneWeekAgo => DateTime.Today - oneWeek;
-
-		public static DateTime Tomorrow => DateTime.Today + oneDay;
-
-		public static DateTime OneMonthAgo => DateTime.Today - new TimeSpan(31, 0, 0, 0);
+		public static DateTime OneMonthAgo => DateTime.Today - TimeSpan.FromDays(31);
 	}
 }

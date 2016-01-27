@@ -8,7 +8,6 @@ using LookBackHistory.Models.HistoryEntries;
 using LookBackHistory.Models.RawChrome;
 using LookBackHistory.Utils;
 using Reactive.Bindings.Extensions;
-using Environment = LookBackHistory.Utils.Environment;
 
 namespace LookBackHistory.Models.HistoryCollections
 {
@@ -17,7 +16,7 @@ namespace LookBackHistory.Models.HistoryCollections
 		public override async Task<bool> LoadAsync()
 		{
 			var fileInfo =
-				await CopyAndGetFileAsync(Environment.GetChromeHistoryPath(), Environment.LocalChromeHistoryFileName);
+				await CopyAndGetFileAsync(PathValues.GetChromeHistoryPath(), PathValues.LocalChromeHistoryFileName);
 			if (!(fileInfo?.Exists ?? false)) return false;
 
 			try
@@ -29,19 +28,19 @@ namespace LookBackHistory.Models.HistoryCollections
 
 				var context = new DataContext(connection).AddTo(this.CompositeDisposable);
 
-					Queryable = from v in context.GetTable<visits>()
-								join u in context.GetTable<urls>() on v.url equals u.id
-								select new ChromeEntry
-								{
-									Id = v.id,
-									FaviconId = u.favicon_id,
-									FromVisit = v.from_visit,
-									Title = u.title,
-									Url = u.url,
-									VisitCount = u.visit_count,
-									VisitTime = v.visit_time / 10,
-									VisitDuration = v.visit_duration,
-								};
+				Queryable = from v in context.GetTable<visits>()
+							join u in context.GetTable<urls>() on v.url equals u.id
+							select new ChromeEntry
+							{
+								Id = v.id,
+								FaviconId = u.favicon_id,
+								FromVisit = v.from_visit,
+								Title = u.title,
+								Url = u.url,
+								VisitCount = u.visit_count,
+								VisitTime = v.visit_time / 10,
+								VisitDuration = v.visit_duration,
+							};
 			}
 			catch (SQLiteException e)
 			{

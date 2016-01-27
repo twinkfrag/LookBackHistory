@@ -8,7 +8,6 @@ using LookBackHistory.Models.HistoryEntries;
 using LookBackHistory.Models.RawMozilla;
 using LookBackHistory.Utils;
 using Reactive.Bindings.Extensions;
-using Environment = LookBackHistory.Utils.Environment;
 
 namespace LookBackHistory.Models.HistoryCollections
 {
@@ -17,7 +16,7 @@ namespace LookBackHistory.Models.HistoryCollections
 		public override async Task<bool> LoadAsync()
 		{
 			var fileInfo =
-				await CopyAndGetFileAsync(Environment.GetMozillaHistoryPath(), Environment.LocalFirefoxHistoryFileName);
+				await CopyAndGetFileAsync(PathValues.GetMozillaHistoryPath(), PathValues.LocalFirefoxHistoryFileName);
 			if (!(fileInfo?.Exists ?? false)) return false;
 
 			try
@@ -31,24 +30,26 @@ namespace LookBackHistory.Models.HistoryCollections
 
 				Queryable = from h in context.GetTable<moz_historyvisits>()
 							join p in context.GetTable<moz_place>() on h.place_id equals p.id
-							select new Entry
+							select new FirefoxEntry
 							{
 								FromVisitId = h.from_visit,
 								Id = h.id,
 								Title = p.title,
 								Url = p.url,
-								//FileTimeSecond = DateTimeEx.FileTimeFromUnixEpoch(h.visit_date / 1000), 
-								//LastAccess = DateTimeEx.FromUnixEpoch(h.visit_date / 1000),
+								VisitDate = h.visit_date,
+								VisitType = h.visit_type,
+								FromVisit = h.from_visit,
+								PlaceId = h.place_id,
+								Session = h.session,
 							};
-
-				return Queryable != null;
 			}
 			catch (SQLiteException e)
 			{
 				Console.WriteLine(e);
 				MessageBox.Show("SQLiteException!");
-				return false;
 			}
+
+			return Queryable != null;
 		}
 	}
 }

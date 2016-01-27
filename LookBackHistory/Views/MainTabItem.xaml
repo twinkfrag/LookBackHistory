@@ -58,15 +58,13 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Title" Grid.Row="0" Grid.Column="0"/>
-						<TextBox x:Name="TitleBox" Width="600" Text="{Binding Path=TitleSearchText, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
+						<TextBox Width="600" Text="{Binding Path=TitleSearchText, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"/>
 						<TextBlock Text="URL" Grid.Row="1" Grid.Column="0" />
-						<TextBox x:Name="UrlBox" Width="600" Text="{Binding Path=UrlSearchText, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" />
+						<TextBox Width="600" Text="{Binding Path=UrlSearchText, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" />
 						<TextBlock Text="Begin Date" Grid.Row="2" Grid.Column="0" />
-						<DatePicker Grid.Row="2" Grid.Column="1" x:Name="BeginDatePicker"
-							SelectedDate="{Binding Path=BeginDate, Mode=TwoWay}" />
+						<DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Path=BeginDate, Mode=TwoWay}" />
 						<TextBlock Text="End Date" Grid.Row="3" Grid.Column="0" />
-						<DatePicker Grid.Row="3" Grid.Column="1" x:Name="EndDatePicker" 
-							SelectedDate="{Binding Path=EndDate, Mode=TwoWay}" />
+						<DatePicker Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Path=EndDate, Mode=TwoWay}" />
 					</Grid>
 				</StackPanel>
 				<Button Command="{Binding SearchCommand, Mode=OneWay}" Content="Search" DockPanel.Dock="Right" />

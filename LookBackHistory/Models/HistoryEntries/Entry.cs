@@ -1,5 +1,4 @@
 ﻿using System;
-using LookBackHistory.Utils;
 
 namespace LookBackHistory.Models.HistoryEntries
 {

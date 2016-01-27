@@ -12,7 +12,7 @@ namespace LookBackHistory.Models.HistoryCollections
 	{
 		public CompositeDisposable CompositeDisposable { get; } = new CompositeDisposable();
 
-		public IEnumerable<Entry> Queryable { get; protected set; }
+		public IQueryable<Entry> Queryable { get; protected set; }
 
 		public abstract Task<bool> LoadAsync();
 
@@ -40,17 +40,11 @@ namespace LookBackHistory.Models.HistoryCollections
 			if (Queryable == null) throw new InvalidOperationException("Not Loaded");
 
 			var e = from h in Queryable.AsEnumerable()
-					//where h.FileTimeSecond > begin.ToFileTime() / 1000
-					//where h.FileTimeSecond < end.ToFileTime() / 1000
+					where h.LastAccess > begin
+					where h.LastAccess < end
 					where h.Title?.Contains(title ?? string.Empty) ?? false
 					where h.Url?.Contains(url ?? string.Empty) ?? false
 					select h;
-			//var e = Queryable.Where(x =>
-			//			(x.Title?.Contains(title ?? string.Empty) ?? false) &&
-			//			(x.LastAccess > begin) &&
-			//			(x.LastAccess < end) &&
-			//			(x.Url?.Contains(url ?? string.Empty) ?? false)
-			//			);
 			return e;
 		} 
 
