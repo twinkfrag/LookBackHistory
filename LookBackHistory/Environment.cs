@@ -7,7 +7,7 @@ using Microsoft.Win32;
 namespace LookBackHistory
 {
 	/// <summary>
-	/// システム環境やP/Invokeのstatuc class
+	/// システム環境やP/Invokeのstatic class
 	/// </summary>
 	public static class Environment
 	{
