@@ -14,6 +14,7 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 using LookBackHistory.ControlsDispatcher;
 using LookBackHistory.Models;
+using LookBackHistory.Models.HistoryEntries;
 using LookBackHistory.Views;
 
 namespace LookBackHistory.ViewModels
@@ -37,6 +38,12 @@ namespace LookBackHistory.ViewModels
 
 			HeaderTitle = !string.IsNullOrEmpty(title) ? title :
 						  !string.IsNullOrEmpty(url) ? url : "Search";
+		}
+
+		public SearchTabItemViewModel(IEnumerable<HistoryEntryBase> history, string header = "Search")
+		{
+			History = history.Select(x => new HistoryEntryViewModel(x)).ToArray();
+			HeaderTitle = header;
 		}
 
 		public string HeaderTitle { get; }
