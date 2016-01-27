@@ -137,8 +137,9 @@
     </ApplicationDefinition>
     <Compile Include="ControlsDispatcher\HistoryLoader.cs" />
     <Compile Include="Environment.cs" />
-    <Compile Include="Models\HistoryCollections\ChromeHistory.cs" />
+    <Compile Include="Models\HistoryCollections\ChromeDispatcher.cs" />
     <Compile Include="Models\HistoryCollections\FirefoxHistory.cs" />
+    <Compile Include="Models\HistoryCollections\HistoryDipatcherBase.cs" />
     <Compile Include="Models\HistoryEntries\ChromeEntry.cs" />
     <Compile Include="Models\HistoryEntries\FirefoxEntry.cs" />
     <Compile Include="Models\HistoryEntries\HistoryEntryBase.cs" />
@@ -150,7 +151,7 @@
     <Compile Include="ViewModels\MainTabItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SearchTabItemViewModel.cs" />
-    <Compile Include="ViewModels\TabItemViewModelBase.cs" />
+    <Compile Include="ViewModels\ITabItem.cs" />
     <Compile Include="Views\MainTabItem.xaml.cs">
       <DependentUpon>MainTabItem.xaml</DependentUpon>
     </Compile>

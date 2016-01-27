@@ -43,9 +43,9 @@ namespace LookBackHistory.ControlsDispatcher
 		public void LoadChrome()
 		{
 			Console.WriteLine("Load Chrome");
-			var h = new ChromeHistory();
-			h.Load();
-			History = h.History;
+			var h = new ChromeDispatcher();
+			h.LoadAsync();
+			History = h.Queryable;
 		}
 	}
 }
