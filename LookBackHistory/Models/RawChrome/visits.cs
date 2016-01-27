@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Linq.Mapping;
+﻿using System.Data.Linq.Mapping;
 // ReSharper disable InconsistentNaming
 #pragma warning disable 0649
 
@@ -15,7 +14,6 @@ namespace LookBackHistory.Models.RawChrome
 		public long url;
 
 		[Column(Name = "visit_time", CanBeNull = false, DbType = "INT")]
-		[Obsolete(@"SQLite.dllで取得できないので10で割る。FileTimeの1/100である。")]
 		public long visit_time;
 
 		[Column(Name = "from_visit", DbType = "INT")]

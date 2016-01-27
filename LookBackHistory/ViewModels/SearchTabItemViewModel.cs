@@ -25,6 +25,20 @@ namespace LookBackHistory.ViewModels
 			HeaderTitle = "Search";
 		}
 
+		public SearchTabItemViewModel(string title, string url, DateTime begin, DateTime end)
+		{
+			//History = HistoryLoader.Instance.History.Where(x =>
+			//	(x.Title?.Contains(title ?? string.Empty) ?? false) &&
+			//		(x.LastAccess > begin) &&
+			//		(x.LastAccess < end) &&
+			//		(x.Url?.Contains(url ?? string.Empty) ?? false))
+			//	.Select(x => new HistoryEntryViewModel(x))
+			//	.ToArray();
+
+			HeaderTitle = !string.IsNullOrEmpty(title) ? title :
+						  !string.IsNullOrEmpty(url) ? url : "Search";
+		}
+
 		public SearchTabItemViewModel(IEnumerable<Entry> history, string header = "Search")
 		{
 			History = history.Select(x => new HistoryEntryViewModel(x)).ToArray();

@@ -29,18 +29,19 @@ namespace LookBackHistory.Models.HistoryCollections
 
 				var context = new DataContext(connection).AddTo(this.CompositeDisposable);
 
-				Queryable = from v in context.GetTable<visits>()
-				            join u in context.GetTable<urls>() on v.url equals u.id
-				            select new Entry
-				            {
-					            Id = v.id,
-					            FromVisitId = v.from_visit,
-					            Title = u.title,
-					            Url = u.url,
-					            Count = u.visit_count,
-					            //FileTimeSecond = v.visit_time / 1000,
-					            //LastAccess = DateTimeEx.FromFileTimeSec(v.visit_time / 1000),
-				            };
+					Queryable = from v in context.GetTable<visits>()
+								join u in context.GetTable<urls>() on v.url equals u.id
+								select new ChromeEntry
+								{
+									Id = v.id,
+									FaviconId = u.favicon_id,
+									FromVisit = v.from_visit,
+									Title = u.title,
+									Url = u.url,
+									VisitCount = u.visit_count,
+									VisitTime = v.visit_time / 10,
+									VisitDuration = v.visit_duration,
+								};
 			}
 			catch (SQLiteException e)
 			{

@@ -34,7 +34,7 @@
 	</i:Interaction.Triggers>
 
 	<ListBox 
-		ItemsSource="{Binding Path=Histories, Mode=OneWay}" 
+		ItemsSource="{Binding Path=History, Mode=OneWay}" 
 		SelectedItem="{Binding Path=SelectedItem, Mode=OneWayToSource}" 
 		>
 		<ItemsControl.Template>

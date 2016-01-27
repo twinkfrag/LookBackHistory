@@ -13,7 +13,7 @@ namespace LookBackHistory.Models.HistoryEntries
 
 		public long FileTimeSecond { get; set; }
 
-		public DateTime LastAccess { get; set; }
+		public virtual DateTime LastAccess { get; set; }
 
 		public int Count { get; set; }
 

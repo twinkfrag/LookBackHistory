@@ -135,12 +135,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\HistoryEntries\Entry.cs" />
     <Compile Include="Utils\CompositeCommands.cs" />
     <Compile Include="Utils\Environment.cs" />
     <Compile Include="Models\HistoryCollections\ChromeDispatcher.cs" />
     <Compile Include="Models\HistoryCollections\FirefoxDispatcher.cs" />
     <Compile Include="Models\HistoryCollections\HistoryDispatcherBase.cs" />
-    <Compile Include="Models\HistoryEntries\Entry.cs" />
+    <Compile Include="Models\HistoryEntries\ChromeEntry.cs" />
+    <Compile Include="Models\HistoryEntries\FirefoxEntry.cs" />
     <Compile Include="Models\RawMozilla\moz_historyvisits.cs" />
     <Compile Include="Models\RawChrome\urls.cs" />
     <Compile Include="Models\RawChrome\visits.cs" />

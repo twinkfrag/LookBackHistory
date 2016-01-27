@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Linq.Mapping;
+﻿using System.Data.Linq.Mapping;
 // ReSharper disable InconsistentNaming
 #pragma warning disable 0649
 
@@ -18,7 +17,6 @@ namespace LookBackHistory.Models.RawMozilla
 		public long place_id;
 
 		[Column(Name = "visit_date", DbType = "INT")]
-		[Obsolete("エポックナノ秒で桁が大きすぎて溢れるのでクエリ レベルで1000で割ってミリ秒にすること")]
 		public long visit_date;
 
 		[Column(Name = "visit_type", DbType = "INT")]
