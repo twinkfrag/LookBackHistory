@@ -31,7 +31,7 @@ namespace LookBackHistory.ControlsDispatcher
 		public void LoadFirefox()
 		{
 			Console.WriteLine("Load Firefox");
-			var h = new FirefoxHistory();
+			var h = new FirefoxDispatcher();
 			h.LoadAsync();
 			History = h.Queryable;
 		}

@@ -138,7 +138,7 @@
     <Compile Include="ControlsDispatcher\HistoryLoader.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="Models\HistoryCollections\ChromeDispatcher.cs" />
-    <Compile Include="Models\HistoryCollections\FirefoxHistory.cs" />
+    <Compile Include="Models\HistoryCollections\FirefoxDispatcher.cs" />
     <Compile Include="Models\HistoryCollections\HistoryDipatcherBase.cs" />
     <Compile Include="Models\HistoryEntries\Entry.cs" />
     <Compile Include="Models\RawMozilla\moz_historyvisits.cs" />

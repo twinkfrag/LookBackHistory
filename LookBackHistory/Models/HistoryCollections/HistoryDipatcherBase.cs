@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive.Disposables;
-using System.Text;
 using System.Threading.Tasks;
 using LookBackHistory.Models.HistoryEntries;
 
@@ -14,7 +14,26 @@ namespace LookBackHistory.Models.HistoryCollections
 
 		public IQueryable<Entry> Queryable { get; protected set; }
 
-		public abstract Task LoadAsync();
+		public abstract Task<bool> LoadAsync();
+
+		protected async Task<FileInfo> CopyAndGetFileAsync(string originalName, string localName)
+		{
+			if (string.IsNullOrEmpty(originalName) || string.IsNullOrEmpty(localName)) return null;
+			var original = new FileInfo(originalName);
+			var fileInfo = new FileInfo(localName);
+
+			if (!original.Exists) return null;
+			if (!fileInfo.Exists || fileInfo.LastWriteTime < original.LastWriteTime)
+			{
+				using (var src = new FileStream(original.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+				using (var dest = new FileStream(fileInfo.FullName, FileMode.OpenOrCreate, FileAccess.Write))
+				{
+					await src.CopyToAsync(dest);
+				}
+				fileInfo.Refresh();
+			}
+			return fileInfo;
+		}
 
 		public IEnumerable<Entry> Search(string title, string url, DateTime begin, DateTime end)
 		{

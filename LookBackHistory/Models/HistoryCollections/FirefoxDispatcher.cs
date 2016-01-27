@@ -1,45 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Linq;
 using System.Data.SQLite;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Livet;
 using LookBackHistory.Models.HistoryEntries;
 using LookBackHistory.Models.RawMozilla;
+using Reactive.Bindings.Extensions;
 
 namespace LookBackHistory.Models.HistoryCollections
 {
-	public class FirefoxHistory : HistoryDipatcherBase
+	public class FirefoxDispatcher : HistoryDipatcherBase
 	{
-		public override async Task LoadAsync()
+		public override async Task<bool> LoadAsync()
 		{
-			var originalMozPlace = new FileInfo(Environment.GetMozillaHistoryPath());
-			var fi = new FileInfo(Environment.LocalFirefoxHistoryFileName);
-
-			if (originalMozPlace.Exists &&
-				(!fi.Exists || originalMozPlace.LastWriteTime > fi.LastWriteTime))
-			{
-				using (var src = new FileStream(originalMozPlace.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-				using (var dest = new FileStream(fi.Name, FileMode.OpenOrCreate, FileAccess.Write))
-				{
-					await src.CopyToAsync(dest);
-				}
-				fi.Refresh();
-			}
-
-			if (!fi.Exists) return;
+			var fileInfo =
+				await CopyAndGetFileAsync(Environment.GetMozillaHistoryPath(), Environment.LocalFirefoxHistoryFileName);
+			if (!(fileInfo?.Exists ?? false)) return false;
 
 			try
 			{
 				var connection = new SQLiteConnection(new SQLiteConnectionStringBuilder
 				{
-					DataSource = fi.FullName,
-				}.ToString());
-				CompositeDisposable.Add(connection);
+					DataSource = fileInfo.FullName,
+				}.ToString()).AddTo(this.CompositeDisposable);
 
 				using (var context = new DataContext(connection))
 				{
@@ -55,11 +39,14 @@ namespace LookBackHistory.Models.HistoryCollections
 									RawTimeMode = Entry.TimeMode.Unix,
 								};
 				}
+
+				return Queryable != null;
 			}
 			catch (SQLiteException e)
 			{
 				Console.WriteLine(e);
 				MessageBox.Show("SQLiteException!");
+				return false;
 			}
 		}
 	}
