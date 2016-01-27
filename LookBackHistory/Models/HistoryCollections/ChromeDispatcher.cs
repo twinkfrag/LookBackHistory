@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using LookBackHistory.Models.HistoryEntries;
 using LookBackHistory.Models.RawChrome;
+using LookBackHistory.Utils;
 using Reactive.Bindings.Extensions;
+using Environment = LookBackHistory.Utils.Environment;
 
 namespace LookBackHistory.Models.HistoryCollections
 {
-	public class ChromeDispatcher : HistoryDipatcherBase
+	public class ChromeDispatcher : HistoryDispatcherBase
 	{
 		public override async Task<bool> LoadAsync()
 		{
@@ -25,30 +27,28 @@ namespace LookBackHistory.Models.HistoryCollections
 					DataSource = fileInfo.FullName
 				}.ToString()).AddTo(this.CompositeDisposable);
 
-				using (var context = new DataContext(connection))
-				{
-					Queryable = from v in context.GetTable<visits>()
-								join u in context.GetTable<urls>() on v.url equals u.id
-								select new Entry
-								{
-									Id = v.id,
-									FromVisitId = v.from_visit,
-									Title = u.title,
-									Url = u.url,
-									Count = u.visit_count,
-									RawTime = v.visit_time / 10,
-									RawTimeMode = Entry.TimeMode.FileTimeCenti,
-								};
-				}
+				var context = new DataContext(connection).AddTo(this.CompositeDisposable);
 
-				return Queryable != null;
+				Queryable = from v in context.GetTable<visits>()
+				            join u in context.GetTable<urls>() on v.url equals u.id
+				            select new Entry
+				            {
+					            Id = v.id,
+					            FromVisitId = v.from_visit,
+					            Title = u.title,
+					            Url = u.url,
+					            Count = u.visit_count,
+					            //FileTimeSecond = v.visit_time / 1000,
+					            //LastAccess = DateTimeEx.FromFileTimeSec(v.visit_time / 1000),
+				            };
 			}
 			catch (SQLiteException e)
 			{
 				Console.WriteLine(e);
 				MessageBox.Show("SQLiteException!");
-				return false;
 			}
+
+			return Queryable != null;
 		}
 	}
 }

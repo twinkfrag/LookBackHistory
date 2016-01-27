@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using LookBackHistory.Models.HistoryEntries;
 using LookBackHistory.Models.RawMozilla;
+using LookBackHistory.Utils;
 using Reactive.Bindings.Extensions;
+using Environment = LookBackHistory.Utils.Environment;
 
 namespace LookBackHistory.Models.HistoryCollections
 {
-	public class FirefoxDispatcher : HistoryDipatcherBase
+	public class FirefoxDispatcher : HistoryDispatcherBase
 	{
 		public override async Task<bool> LoadAsync()
 		{
@@ -25,20 +27,19 @@ namespace LookBackHistory.Models.HistoryCollections
 					DataSource = fileInfo.FullName,
 				}.ToString()).AddTo(this.CompositeDisposable);
 
-				using (var context = new DataContext(connection))
-				{
-					Queryable = from h in context.GetTable<moz_historyvisits>()
-								join p in context.GetTable<moz_place>() on h.place_id equals p.id
-								select new Entry
-								{
-									FromVisitId = h.from_visit,
-									Id = h.id,
-									Title = p.title,
-									Url = p.url,
-									RawTime = h.visit_date / 1000,
-									RawTimeMode = Entry.TimeMode.Unix,
-								};
-				}
+				var context = new DataContext(connection).AddTo(CompositeDisposable);
+
+				Queryable = from h in context.GetTable<moz_historyvisits>()
+							join p in context.GetTable<moz_place>() on h.place_id equals p.id
+							select new Entry
+							{
+								FromVisitId = h.from_visit,
+								Id = h.id,
+								Title = p.title,
+								Url = p.url,
+								//FileTimeSecond = DateTimeEx.FileTimeFromUnixEpoch(h.visit_date / 1000), 
+								//LastAccess = DateTimeEx.FromUnixEpoch(h.visit_date / 1000),
+							};
 
 				return Queryable != null;
 			}

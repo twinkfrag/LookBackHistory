@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using LookBackHistory.ControlsDispatcher;
 using LookBackHistory.ViewModels;
 
 namespace LookBackHistory.Views

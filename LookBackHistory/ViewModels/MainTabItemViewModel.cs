@@ -12,6 +12,9 @@ using Livet.EventListeners;
 using Livet.Messaging.Windows;
 
 using LookBackHistory.Models;
+using LookBackHistory.Models.HistoryCollections;
+using LookBackHistory.Utils;
+using Reactive.Bindings.Extensions;
 
 namespace LookBackHistory.ViewModels
 {
@@ -23,6 +26,9 @@ namespace LookBackHistory.ViewModels
 
 		public string HeaderTitle => "Main";
 
+		private CompositeCommands CompositeCommands { get; } = new CompositeCommands();
+
+		private HistoryDispatcherBase dispatcher;
 
 		#region TitleSearchText変更通知プロパティ
 		private string _TitleSearchText;
@@ -59,7 +65,7 @@ namespace LookBackHistory.ViewModels
 		#endregion
 
 		#region BeginDate変更通知プロパティ
-		private DateTime _BeginDate = Utils.OneMonthAgo;
+		private DateTime _BeginDate = DateTimeEx.OneMonthAgo;
 
 		public DateTime BeginDate
 		{
@@ -76,7 +82,7 @@ namespace LookBackHistory.ViewModels
 		#endregion
 
 		#region EndDate変更通知プロパティ
-		private DateTime _EndDate = DateTime.Today;
+		private DateTime _EndDate = DateTimeEx.Tomorrow;
 
 		public DateTime EndDate
 		{
@@ -106,6 +112,7 @@ namespace LookBackHistory.ViewModels
 					return;
 				_IsDataLoaded = value;
 				RaisePropertyChanged();
+				CompositeCommands.RaiseCanExtecuteChangedAll();
 			}
 		}
 		#endregion
@@ -120,7 +127,7 @@ namespace LookBackHistory.ViewModels
 			{
 				if (_LoadFirefoxCommand == null)
 				{
-					_LoadFirefoxCommand = new ViewModelCommand(LoadFirefox, CanLoadFirefox);
+					_LoadFirefoxCommand = new ViewModelCommand(LoadFirefox, CanLoadFirefox).AddTo(CompositeCommands);
 				}
 				return _LoadFirefoxCommand;
 			}
@@ -128,9 +135,11 @@ namespace LookBackHistory.ViewModels
 
 		public bool CanLoadFirefox() => !IsDataLoaded;
 
-		public void LoadFirefox()
+		public async void LoadFirefox()
 		{
-			IsDataLoaded = true;
+			dispatcher?.Dispose();
+			dispatcher = new FirefoxDispatcher().AddTo(this.CompositeDisposable);
+			IsDataLoaded = await dispatcher.LoadAsync();
 		}
 		#endregion
 
@@ -144,7 +153,7 @@ namespace LookBackHistory.ViewModels
 			{
 				if (_LoadChromeCommand == null)
 				{
-					_LoadChromeCommand = new ViewModelCommand(LoadChrome, CanLoadChrome);
+					_LoadChromeCommand = new ViewModelCommand(LoadChrome, CanLoadChrome).AddTo(CompositeCommands);
 				}
 				return _LoadChromeCommand;
 			}
@@ -152,9 +161,11 @@ namespace LookBackHistory.ViewModels
 
 		public bool CanLoadChrome() => !IsDataLoaded;
 
-		public void LoadChrome()
+		public async void LoadChrome()
 		{
-			IsDataLoaded = true;
+			dispatcher?.Dispose();
+			dispatcher = new ChromeDispatcher().AddTo(this.CompositeDisposable);
+			IsDataLoaded = await dispatcher.LoadAsync();
 		}
 		#endregion
 
@@ -168,7 +179,7 @@ namespace LookBackHistory.ViewModels
 			{
 				if (_SearchCommand == null)
 				{
-					_SearchCommand = new ViewModelCommand(Search, CanSearch);
+					_SearchCommand = new ViewModelCommand(Search, CanSearch).AddTo(CompositeCommands);
 				}
 				return _SearchCommand;
 			}
@@ -178,11 +189,12 @@ namespace LookBackHistory.ViewModels
 
 		public void Search()
 		{
-			MainWindowViewModel.Instance.TabItems.Add(new SearchTabItemViewModel(
-				title: TitleSearchText,
-				url: UrlSearchText,
-				begin: BeginDate,
-				end: EndDate));
+			var q = dispatcher.Search(TitleSearchText, UrlSearchText, BeginDate, EndDate);
+			var header = TitleSearchText.GetOrDefault(UrlSearchText).GetOrDefault("Search");
+
+			MainWindowViewModel.Instance.TabItems.Add(new SearchTabItemViewModel(q, header));
+
+			dispatcher.Dispose();
 		}
 		#endregion
 

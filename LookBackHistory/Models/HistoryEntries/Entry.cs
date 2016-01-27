@@ -1,4 +1,5 @@
 ﻿using System;
+using LookBackHistory.Utils;
 
 namespace LookBackHistory.Models.HistoryEntries
 {
@@ -10,25 +11,9 @@ namespace LookBackHistory.Models.HistoryEntries
 
 		public string Title { get; set; }
 
-		internal long RawTime { private get; set; }
+		public long FileTimeSecond { get; set; }
 
-		internal TimeMode RawTimeMode { private get; set; }
-
-		public DateTime LastAccess
-		{
-			get
-			{
-				switch (RawTimeMode)
-				{
-					case TimeMode.Unix:
-						return Utils.GetDateTime(RawTime);
-					case TimeMode.FileTimeCenti:
-						return DateTime.FromFileTime(RawTime * 100);
-					default:
-						throw new NotSupportedException(nameof(RawTimeMode));
-				}
-			}
-		}
+		public DateTime LastAccess { get; set; }
 
 		public int Count { get; set; }
 
@@ -42,7 +27,5 @@ namespace LookBackHistory.Models.HistoryEntries
 		{
 			return $"{Title} : {Url} : {LastAccess:yyMMdd HHmmss}";
 		}
-
-		public enum TimeMode { Unix, FileTimeCenti }
 	}
 }
