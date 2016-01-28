@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22310.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookBackHistory", "LookBackHistory\LookBackHistory.csproj", "{00BE24A7-4BBF-4CF4-B6CB-1915EFF200AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeMaps", "CodeMaps", "{E5A18D90-96C2-487B-8F50-AA51348E053D}"
+	ProjectSection(SolutionItems) = preProject
+		CodeMapAfterRefactoring.dgml = CodeMapAfterRefactoring.dgml
+		CodeMapAfterRefactoring_Overview.dgml = CodeMapAfterRefactoring_Overview.dgml
+		CodeMapBeforeRefactoring.dgml = CodeMapBeforeRefactoring.dgml
+		CodeMapBeforeRefactoring_Overview.dgml = CodeMapBeforeRefactoring_Overview.dgml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
